@@ -24,21 +24,13 @@ public class SpecificServiceImpl implements SpecificService {
     @Override
     public SpecificUserAccountsOutModel fetchAllUserAccounts() {
         List<UserEntity> users = userRepository.findAll();
-        List<AccountEntity> accounts = accountRepository.findAll();
-        List<User> usersDto = simpleMapper.listUserEntityToDto(users);
-        User newUser = new User();
-        newUser.setName("kakui");
-        newUser.setPin("1234");
-        UserEntity userEntity = simpleMapper.dtoToEntity(newUser);
-        userRepository.save(userEntity);
-        users = userRepository.findAll();
-        System.out.println(users.get(0).getAccounts());
         return SpecificUserAccountsOutModel.builder().users(simpleMapper.listUserEntityToDto(users)).build();
     }
 
     @Override
     public SpecificAccountTransactionsOutModel fetchAccountTransactions() {
-        return null;
+        List<UserEntity> users = userRepository.findAll();
+        return SpecificAccountTransactionsOutModel.builder().users(simpleMapper.listUserEntityToDto(users)).build();
     }
 }
 
