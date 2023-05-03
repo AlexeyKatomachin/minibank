@@ -13,9 +13,4 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CreateAccountInModel {
     private User user;
-//    private Account account;
-//    private String accNumber;
-//    private String userName;
-//    private String userPin;
-//    private BigDecimal accValue;
 }

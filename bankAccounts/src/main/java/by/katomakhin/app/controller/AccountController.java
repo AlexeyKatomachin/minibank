@@ -23,17 +23,17 @@ public class AccountController {
     }
 
     @PostMapping("/deposit")
-    public void deposit (DepositInModel depositInModel) {
+    public void deposit (@RequestBody DepositInModel depositInModel) {
         accountService.deposit(depositInModel);
     }
 
     @PostMapping("/withdraw")
-    public void withdraw (WithdrawInModel withdrawInModel) {
+    public void withdraw (@RequestBody WithdrawInModel withdrawInModel) {
         accountService.withdraw(withdrawInModel);
     }
 
     @PostMapping("/transfer")
-    public void transfer (TransferInModel transferInModel) {
+    public void transfer (@RequestBody TransferInModel transferInModel) {
         accountService.transfer(transferInModel);
     }
 }
