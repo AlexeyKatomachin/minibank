@@ -15,7 +15,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String pin;
+    private int pin;
 
     @OneToMany(targetEntity = AccountEntity.class, fetch = FetchType.EAGER, mappedBy = "users")
     private List<AccountEntity> accounts;

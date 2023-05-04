@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 @Getter
 @Setter
-public class Transaction {
-    private Date time;
-    private BigDecimal trvalue;
+@Builder
+public class CreateAccountDto {
+    private String userName;
+    private int userPin;
+    private BigDecimal accValue;
 }

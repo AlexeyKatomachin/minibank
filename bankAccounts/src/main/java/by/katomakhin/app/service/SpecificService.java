@@ -1,11 +1,12 @@
 package by.katomakhin.app.service;
 
-import by.katomakhin.app.model.SpecificAccountTransactionsOutModel;
-import by.katomakhin.app.model.SpecificUserAccountsOutModel;
-import org.springframework.stereotype.Component;
+import by.katomakhin.app.dto.SpecificAccountTransactionsRequestDto;
+import by.katomakhin.app.dto.SpecificAccountTransactionsResponseDto;
+import by.katomakhin.app.dto.SpecificUserAccountsRequestDto;
+import by.katomakhin.app.dto.SpecificUserAccountsResponseDto;
 
 public interface SpecificService {
-    SpecificUserAccountsOutModel fetchAllUserAccounts();
+    SpecificUserAccountsResponseDto fetchAllUserAccounts(SpecificUserAccountsRequestDto requestDto);
 
-    SpecificAccountTransactionsOutModel fetchAccountTransactions();
+    SpecificAccountTransactionsResponseDto fetchAccountTransactions(SpecificAccountTransactionsRequestDto requestDto);
 }

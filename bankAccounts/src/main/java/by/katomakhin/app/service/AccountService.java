@@ -1,17 +1,16 @@
 package by.katomakhin.app.service;
 
-import by.katomakhin.app.model.CreateAccountInModel;
-import by.katomakhin.app.model.DepositInModel;
-import by.katomakhin.app.model.TransferInModel;
-import by.katomakhin.app.model.WithdrawInModel;
-import org.springframework.stereotype.Component;
+import by.katomakhin.app.dto.CreateAccountDto;
+import by.katomakhin.app.dto.DepositDto;
+import by.katomakhin.app.dto.TransferDto;
+import by.katomakhin.app.dto.WithdrawDto;
 
 public interface AccountService {
-    void createAccount(CreateAccountInModel accountIn);
+    void createAccount(CreateAccountDto createAccountDto);
 
-    void deposit(DepositInModel fillInAccountInfo);
+    void deposit(DepositDto depositDto);
 
-    void withdraw(WithdrawInModel withdrawInModel);
+    void withdraw(WithdrawDto withdrawDto);
 
-    void transfer(TransferInModel transferInModel);
+    void transfer(TransferDto transferDto);
 }

@@ -1,7 +1,5 @@
-package by.katomakhin.app.model;
+package by.katomakhin.app.dto;
 
-import by.katomakhin.app.dto.Account;
-import by.katomakhin.app.dto.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -13,7 +11,9 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
-public class WithdrawInModel {
-    private User userTo;
+public class WithdrawDto {
+    private String userName;
+    private int userPin;
+    private String accNumber;
     private BigDecimal value;
 }

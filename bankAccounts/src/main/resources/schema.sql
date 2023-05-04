@@ -1,24 +1,24 @@
 create table USERS(
-    ID int not null AUTO_INCREMENT,
+    ID long not null AUTO_INCREMENT,
     NAME varchar(100) not null,
-    PIN int,
+    PIN int not null,
     PRIMARY KEY ( ID )
 );
 
 create table ACCOUNTS(
-    ID int not null AUTO_INCREMENT,
+    ID long not null AUTO_INCREMENT,
     ACCNUMBER varchar(100) not null,
-    ACCVALUE int,
-    USERS_ID int,
+    ACCVALUE bigint,
+    USERS_ID long not null,
     PRIMARY KEY ( ID ),
 FOREIGN KEY (USERS_ID) REFERENCES USERS(ID)
 );
 
 create table TRANSACTIONS(
-    ID int not null AUTO_INCREMENT,
-    TIME date,
-    TRVALUE int,
-    ACCOUNTS_ID int,
+    ID long not null AUTO_INCREMENT,
+    TIME date not null,
+    TRVALUE bigint,
+    ACCOUNTS_ID long not null,
     PRIMARY KEY ( ID ),
     FOREIGN KEY (ACCOUNTS_ID) REFERENCES ACCOUNTS(ID)
 );
