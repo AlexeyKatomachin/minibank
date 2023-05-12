@@ -15,6 +15,8 @@ import by.katomakhin.app.utils.AccountUtils;
 import by.katomakhin.app.validator.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -29,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
     private final Validator validator;
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
     public void createAccount(CreateAccountDto createAccountDto) {
         UserEntity user = userRepository.findUserEntitiesByName(createAccountDto.getUserName());
         if (user == null) {
@@ -46,24 +48,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
     public void deposit(DepositDto depositDto) {
         validator.validateAcc(depositDto.getAccNumber());
         AccountEntity account = accountRepository.findAccountEntityByAccnumber(depositDto.getAccNumber());
         account.setAccvalue(account.getAccvalue().add(depositDto.getValue()));
+        accountRepository.save(account);
 
         TransactionEntity transaction = new TransactionEntity();
         transaction.setAccounts(account);
         transaction.setTime(new Date());
         transaction.setTrvalue(new BigDecimal(0).add(depositDto.getValue()));
-
-
-        accountRepository.save(account);
         transactionRepository.save(transaction);
     }
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
     public void withdraw(WithdrawDto withdrawDto) {
         validator.validatePin(withdrawDto.getUserName(), withdrawDto.getUserPin());
         validator.validateAcc(withdrawDto.getAccNumber());
@@ -80,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
     public void transfer(TransferDto transferDto) {
         validator.validatePin(transferDto.getUserName(), transferDto.getUserPin());
         validator.validateAcc(transferDto.getAccNumberFrom());
@@ -93,6 +93,8 @@ public class AccountServiceImpl implements AccountService {
         accountFrom.setAccvalue(accountFrom.getAccvalue().subtract(transferDto.getValue()));
         accountTo.setAccvalue(accountTo.getAccvalue().add(transferDto.getValue()));
 
+        accountRepository.save(accountFrom);
+        accountRepository.save(accountTo);
 
         Date date = new Date();
         TransactionEntity transactionFrom = new TransactionEntity();

@@ -18,8 +18,8 @@ public class AccountEntity {
     private String accnumber;
     private BigDecimal accvalue;
 
-    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = UserEntity.class)
     private UserEntity users;
-    @OneToMany(targetEntity = TransactionEntity.class, fetch = FetchType.EAGER, mappedBy = "accounts")
+    @OneToMany(targetEntity = TransactionEntity.class, mappedBy = "accounts")
     private List<TransactionEntity> transactions;
 }

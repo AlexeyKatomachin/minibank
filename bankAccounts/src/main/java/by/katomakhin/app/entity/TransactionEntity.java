@@ -18,6 +18,6 @@ public class TransactionEntity {
     private Date time;
     private BigDecimal trvalue;
 
-    @ManyToOne(targetEntity = AccountEntity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = AccountEntity.class)
     private AccountEntity accounts;
 }

@@ -17,7 +17,7 @@ public class UserEntity {
     private String name;
     private int pin;
 
-    @OneToMany(targetEntity = AccountEntity.class, fetch = FetchType.EAGER, mappedBy = "users")
+    @OneToMany(targetEntity = AccountEntity.class, mappedBy = "users")
     private List<AccountEntity> accounts;
 }
 
